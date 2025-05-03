@@ -11,25 +11,25 @@ discourse_darkvisitors:
     client: false
   darkvisitors_robots_txt_agents:
     type: list
-    default: "AI Data Scrapers|Undocumented AI Agents"
+    default: "AI Data Scraper|Undocumented AI Agent"
     client: false
     allow_any: false
     list_type: compact
     choices:
-      - AI Agents
-      - AI Assistants
-      - AI Data Scrapers
-      - AI Search Crawlers
-      - Archivers
-      - Developer Helpers
-      - Fetchers
-      - Headless Agents
-      - Intelligence Gatherers
-      - Scrapers
-      - Search Engine Crawlers
-      - SEO Crawlers
-      - Uncategorized Agents
-      - Undocumented AI Agents
+      - AI Agent
+      - AI Assistant
+      - AI Data Scraper
+      - AI Search Crawler
+      - Archiver
+      - Developer Helper
+      - Fetcher
+      - Headless Agent
+      - Intelligence Gatherer
+      - Scraper
+      - Search Engine Crawler
+      - SEO Crawler
+      - Uncategorized Agent
+      - Undocumented AI Agent
   darkvisitors_robots_txt_path:
     default: '/'
     client: false

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # name: discourse-darkvisitors
 # about: Connects to Dark Visitors to keep the robots.txt up to date and monitor crawlers and scrapers visiting your forum.
 # meta_topic_id:
@@ -13,5 +15,22 @@ module ::DarkVisitors
 end
 
 after_initialize do
-  #
+  require_relative "lib/engine.rb"
+  require_relative "lib/robots_txt.rb"
+
+  on(:robots_info) do |robots_info|
+    DarkVisitors::RobotsTxt.on_robots_info(robots_info)
+  end
+  on(:site_setting_changed) do |name, old_value, new_value|
+    if %i[
+         darkvisitors_robots_txt_enabled
+         darkvisitors_access_token
+         darkvisitors_robots_txt_agents
+         darkvisitors_robots_txt_path
+         darkvisitors_robots_txt_api
+       ].exclude? name
+      next
+    end
+    DarkVisitors::RobotsTxt.update_robots_txt
+  end
 end
