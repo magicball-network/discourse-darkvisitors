@@ -1,0 +1,67 @@
+discourse_darkvisitors:
+  darkvisitors_enabled:
+    default: false
+    client: false
+  darkvisitors_access_token:
+    default: ""
+    client: false
+    secret: true
+  darkvisitors_robots_txt_enabled:
+    default: false
+    client: false
+  darkvisitors_robots_txt_agents:
+    type: list
+    default: "AI Data Scrapers|Undocumented AI Agents"
+    client: false
+    allow_any: false
+    list_type: compact
+    choices:
+      - AI Agents
+      - AI Assistants
+      - AI Data Scrapers
+      - AI Search Crawlers
+      - Archivers
+      - Developer Helpers
+      - Fetchers
+      - Headless Agents
+      - Intelligence Gatherers
+      - Scrapers
+      - Search Engine Crawlers
+      - SEO Crawlers
+      - Uncategorized Agents
+      - Undocumented AI Agents
+  darkvisitors_robots_txt_path:
+    default: '/'
+    client: false
+  darkvisitors_server_analytics:
+    type: enum
+    default: disabled
+    client: false
+    choices:
+      - disabled
+      - anonymous_only
+      - enabled
+  darkvisitors_client_analytics:
+    type: enum
+    default: disabled
+    client: false
+    choices:
+      - disabled
+      - anonymous_only
+      - enabled
+  darkvisitors_client_analytics_project_key:
+    default: ""
+    client: false
+
+  darkvisitors_robots_txt_api:
+    default: "https://api.darkvisitors.com/robots-txts"
+    client: false
+    hidden: true
+  darkvisitors_server_analytics_api:
+    default: "https://api.darkvisitors.com/visits"
+    client: false
+    hidden: true
+  darkvisitors_client_analytics_script:
+    default: "https://darkvisitors.com/tracker.js"
+    client: false
+    hidden: true

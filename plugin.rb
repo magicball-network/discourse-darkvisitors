@@ -1,5 +1,5 @@
 # name: discourse-darkvisitors
-# about: connects to [Dark Visitors](https://darkvisitors.com/) to keep the robots.txt up to date and monitor crawlers and scrapers visiting your forum.
+# about: Connects to Dark Visitors to keep the robots.txt up to date and monitor crawlers and scrapers visiting your forum.
 # meta_topic_id:
 # version: 0.1
 # authors: elmuerte
