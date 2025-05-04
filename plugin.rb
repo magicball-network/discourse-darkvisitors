@@ -20,6 +20,7 @@ end
 
 after_initialize do
   require_relative "lib/engine.rb"
+
   require_relative "lib/robots_txt.rb"
   require_relative "jobs/scheduled/update_robots_txt"
 
@@ -33,9 +34,8 @@ after_initialize do
          darkvisitors_robots_txt_agents
          darkvisitors_robots_txt_path
          darkvisitors_robots_txt_api
-       ].exclude? name
-      next
+       ].include?(name)
+      Jobs.enqueue(DarkVisitors::Jobs::UpdateRobotsTxt)
     end
-    Jobs.enqueue(DarkVisitors::Jobs::UpdateRobotsTxt)
   end
 end

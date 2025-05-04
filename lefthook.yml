@@ -18,6 +18,20 @@ pre-commit:
       glob: "*.yml"
       run: bundle exec yaml-lint {staged_files}
 
+fix-staged:
+  parallel: false
+  commands:
+    prettier:
+      glob: "*.js"
+      include: "assets/javascripts"
+      run: pnpm pprettier --write {staged_files}
+    rubocop:
+      glob: "*.rb"
+      run: bundle exec rubocop --force-exclusion -A {staged_files}
+    syntax_tree:
+      glob: "*.rb"
+      run: bundle exec stree write Gemfile {staged_files}
+
 lints:
   parallel: true
   commands:

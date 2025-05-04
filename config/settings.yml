@@ -35,14 +35,14 @@ discourse_darkvisitors:
   darkvisitors_client_analytics:
     type: enum
     default: disabled
-    client: false
+    client: true
     choices:
       - disabled
       - anonymous_only
       - enabled
   darkvisitors_client_analytics_project_key:
     default: ""
-    client: false
+    client: true
 
   darkvisitors_robots_txt_api:
     default: "https://api.darkvisitors.com/robots-txts"
@@ -54,5 +54,5 @@ discourse_darkvisitors:
     hidden: true
   darkvisitors_client_analytics_script:
     default: "https://darkvisitors.com/tracker.js"
-    client: false
+    client: true
     hidden: true
