@@ -12,6 +12,8 @@ enabled_site_setting :darkvisitors_enabled
 
 module ::DarkVisitors
   PLUGIN_NAME = "discourse-darkvisitors"
+  HTTP_USER_AGENT =
+    "#{PLUGIN_NAME}/1.0 (+https://github.com/magicball-network/discourse-darkvisitors)"
 end
 module ::DarkVisitors::Jobs
 end

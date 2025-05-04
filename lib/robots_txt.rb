@@ -44,8 +44,7 @@ module DarkVisitors
       headers = {
         "Content-Type" => "application/json",
         "Authorization" => "Bearer " + SiteSetting.darkvisitors_access_token,
-        "User-Agent" =>
-          "Ruby net/http; Discourse Plugin; https://github.com/magicball-network/discourse-darkvisitors"
+        "User-Agent" => HTTP_USER_AGENT
       }
       response = Net::HTTP.post(uri, request, headers)
       unless response.code == "200"
@@ -77,6 +76,7 @@ module DarkVisitors
         ROBOTS_TXT,
         { last_update: DateTime.now.to_s, agents: agents }
       )
+      Rails.logger.info "Received #{agents.count} agents to deny from Dark Visitors"
     end
   end
 end
