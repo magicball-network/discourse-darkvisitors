@@ -13,10 +13,13 @@ enabled_site_setting :darkvisitors_enabled
 module ::DarkVisitors
   PLUGIN_NAME = "discourse-darkvisitors"
 end
+module ::DarkVisitors::Jobs
+end
 
 after_initialize do
   require_relative "lib/engine.rb"
   require_relative "lib/robots_txt.rb"
+  require_relative "jobs/scheduled/update_robots_txt"
 
   on(:robots_info) do |robots_info|
     DarkVisitors::RobotsTxt.on_robots_info(robots_info)
@@ -31,6 +34,6 @@ after_initialize do
        ].exclude? name
       next
     end
-    DarkVisitors::RobotsTxt.update_robots_txt
+    Jobs.enqueue(DarkVisitors::Jobs::UpdateRobotsTxt)
   end
 end
