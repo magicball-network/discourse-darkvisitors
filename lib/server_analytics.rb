@@ -41,9 +41,15 @@ module DarkVisitors
         request_path: env["REQUEST_PATH"],
         request_method: env["REQUEST_METHOD"],
         request_headers: {
-          "Remote-Addr" => data[:request_remote_ip]
         }
       }
+      if data[:request_remote_ip].include?(":")
+        request[:request_headers]["Remote-Addr"] = "[" +
+          data[:request_remote_ip] + "]"
+      else
+        request[:request_headers]["Remote-Addr"] = data[:request_remote_ip]
+      end
+
       @header_map.each do |key, header|
         next if env[key].blank?
         request[:request_headers][header] = env[key]
