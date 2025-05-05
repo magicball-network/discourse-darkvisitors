@@ -3,4 +3,5 @@ en:
     darkvisitors_access_token: "Go to the project settings at Dark Visitors and copy the Access Token."
     darkvisitors_robots_txt_enabled: "Only when enabled will the robots.txt be updated with agents retrieved from Dark Visitors."
     darkvisitors_robots_txt_agents: "Agent types to include in the robots.txt. See https://darkvisitors.com/agents for an overview of all agents."
+    darkvisitors_server_analytics_include: "Besides standard tracked requests, what other requests should be reported to Dark Visitors."
     darkvisitors_client_analytics_project_key: "Go to the project settings at Dark Visitors and copy the project_key value from the \"JavaScript Tag\"."

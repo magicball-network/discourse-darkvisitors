@@ -41,7 +41,8 @@ discourse_darkvisitors:
     choices:
       - uploads
       - not_found
-      - everything
+      ## Everything results in a lot of tracked request. 
+      #- everything
   darkvisitors_client_analytics:
     type: enum
     default: disabled
@@ -54,6 +55,10 @@ discourse_darkvisitors:
     default: ""
     client: true
 
+  # If true, certain requests will not actually be send. Just logged.
+  darkvisitors_simulate:
+    default: false
+    hidden: true
   darkvisitors_robots_txt_api:
     default: "https://api.darkvisitors.com/robots-txts"
     client: false

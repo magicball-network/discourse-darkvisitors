@@ -50,6 +50,10 @@ module DarkVisitors
       end
 
       Scheduler::Defer.later("Track Dark Visitors") do
+        if SiteSetting.darkvisitors_simulate
+          Rails.logger.info "Dark Visitors analytics payload: #{request.to_json}"
+          return
+        end
         uri =
           URI(
             SiteSetting.darkvisitors_server_analytics_api ||
@@ -72,7 +76,7 @@ module DarkVisitors
 
     def self.ignore_path(path)
       # Never report these paths
-      path.start_with?("/admin/", "/mini-profiler-resources/")
+      path.start_with?("/admin/", "/sidekiq/", "/mini-profiler-resources/")
     end
 
     def self.should_track(data, path)
