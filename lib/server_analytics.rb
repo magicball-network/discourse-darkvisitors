@@ -34,6 +34,7 @@ module DarkVisitors
         return
       end
       return unless should_track(data, relpath)
+      return if ignore_user_agent(env["HTTP_USER_AGENT"])
 
       request = {
         request_path: env["REQUEST_PATH"],
@@ -95,6 +96,12 @@ module DarkVisitors
         return true
       end
       data[:track_view]
+    end
+
+    def self.ignore_user_agent(user_agent)
+      return false if SiteSetting.darkvisitors_server_analytics_ignore == ""
+      agents = SiteSetting.darkvisitors_server_analytics_ignore.split("|")
+      agents.any? { |s| user_agent.include?(s) }
     end
   end
 end

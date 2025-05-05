@@ -43,6 +43,10 @@ discourse_darkvisitors:
       - not_found
       ## Everything results in a lot of tracked request. 
       #- everything
+  darkvisitors_server_analytics_ignore:
+    type: list
+    default: "hetrix.tools|www.uptimerobot.com"
+    client: false
   darkvisitors_client_analytics:
     type: enum
     default: disabled
