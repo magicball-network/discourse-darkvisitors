@@ -9,17 +9,15 @@ module DarkVisitors
       User-Agent
       Referer
       From
-      X-Country-Code
       X-Forwarded-For
       X-Real-IP
-      Client-IP
-      CF-Connecting-IP
-      X-Cluster-Client-IP
       Forwarded
       X-Original-Forwarded-For
-      Fastly-Client-IP
-      True-Client-IP
-      X-Appengine-User-IP
+      Accept
+      Accept-Language
+      Accept-Encoding
+      Connection
+      Origin
     ]
     @header_map =
       @headers.map { |k| ["HTTP_" + k.sub("-", "_").upcase, k] }.to_h
