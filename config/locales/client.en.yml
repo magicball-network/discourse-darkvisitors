@@ -1,4 +1,7 @@
 en:
+  js:
+    discourse_darkvisitors:
+      title: "Dark Visitors"
   admin_js:
     admin:
       site_settings:
