@@ -13,7 +13,7 @@ discourse_darkvisitors:
     type: list
     default: "AI Data Scraper|Undocumented AI Agent"
     client: false
-    allow_any: false
+    allow_any: true
     list_type: compact
     choices:
       - AI Agent
@@ -32,6 +32,16 @@ discourse_darkvisitors:
       - disabled
       - anonymous_only
       - enabled
+  darkvisitors_server_analytics_include:
+    type: list
+    default: ""
+    client: false
+    allow_any: false
+    list_type: compact
+    choices:
+      - uploads
+      - not_found
+      - everything
   darkvisitors_client_analytics:
     type: enum
     default: disabled

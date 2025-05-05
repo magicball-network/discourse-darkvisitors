@@ -24,6 +24,8 @@ after_initialize do
   require_relative "lib/robots_txt.rb"
   require_relative "jobs/scheduled/update_robots_txt"
 
+  require_relative "lib/server_analytics.rb"
+
   on(:robots_info) do |robots_info|
     DarkVisitors::RobotsTxt.on_robots_info(robots_info)
   end
@@ -38,4 +40,8 @@ after_initialize do
       Jobs.enqueue(DarkVisitors::Jobs::UpdateRobotsTxt)
     end
   end
+
+  logger =
+    lambda { |env, data| DarkVisitors::ServerAnalytics.log_request(env, data) }
+  Middleware::RequestTracker.register_detailed_request_logger(logger)
 end
