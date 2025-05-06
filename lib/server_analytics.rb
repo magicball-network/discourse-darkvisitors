@@ -24,6 +24,10 @@ module DarkVisitors
 
     def self.log_request(env, data)
       return if SiteSetting.darkvisitors_server_analytics == "disabled"
+      if SiteSetting.darkvisitors_access_token.empty?
+        Rails.logger.warn "Dark Visitors analytics not available because access token is not configured"
+        return
+      end
       if data[:has_auth_cookie] &&
            SiteSetting.darkvisitors_server_analytics == "anonymous_only"
         return
@@ -42,11 +46,13 @@ module DarkVisitors
         request_headers: {
         }
       }
-      if data[:request_remote_ip].include?(":")
-        request[:request_headers]["Remote-Addr"] = "[" +
-          data[:request_remote_ip] + "]"
-      else
-        request[:request_headers]["Remote-Addr"] = data[:request_remote_ip]
+      if data[:request_remote_ip]
+        if data[:request_remote_ip].include?(":")
+          request[:request_headers]["Remote-Addr"] = "[" +
+            data[:request_remote_ip] + "]"
+        else
+          request[:request_headers]["Remote-Addr"] = data[:request_remote_ip]
+        end
       end
 
       @header_map.each do |key, header|
@@ -54,23 +60,25 @@ module DarkVisitors
         request[:request_headers][header] = env[key]
       end
 
-      Scheduler::Defer.later("Track Dark Visitors") do
-        if SiteSetting.darkvisitors_simulate
-          Rails.logger.info "Dark Visitors analytics payload: #{request.to_json}"
-          return
-        end
-        uri =
-          URI(
-            SiteSetting.darkvisitors_server_analytics_api ||
-              "https://api.darkvisitors.com/visits"
-          )
-        headers = {
-          "Content-Type" => "application/json",
-          "Authorization" => "Bearer " + SiteSetting.darkvisitors_access_token,
-          "User-Agent" => HTTP_USER_AGENT
-        }
-        Net::HTTP.post(uri, request.to_json, headers)
+      Scheduler::Defer.later("Track Dark Visitors") { report_visit(request) }
+    end
+
+    def self.report_visit(request)
+      if SiteSetting.darkvisitors_simulate
+        Rails.logger.info "Dark Visitors analytics payload: #{request.to_json}"
+        return
       end
+      uri =
+        URI(
+          SiteSetting.darkvisitors_server_analytics_api ||
+            "https://api.darkvisitors.com/visits"
+        )
+      headers = {
+        "Content-Type" => "application/json",
+        "Authorization" => "Bearer " + SiteSetting.darkvisitors_access_token,
+        "User-Agent" => HTTP_USER_AGENT
+      }
+      Net::HTTP.post(uri, request.to_json, headers)
     end
 
     def self.relative_request_path(env)
@@ -86,7 +94,7 @@ module DarkVisitors
 
     def self.should_track(data, path)
       if SiteSetting.darkvisitors_server_analytics_include == ""
-        return data[:track_view]
+        return data[:track_view] == true
       end
       opts = SiteSetting.darkvisitors_server_analytics_include.split("|")
       return true if opts.include?("everything")
@@ -95,10 +103,11 @@ module DarkVisitors
            path.start_with?("/uploads/")
         return true
       end
-      data[:track_view]
+      data[:track_view] == true
     end
 
     def self.ignore_user_agent(user_agent)
+      return true if user_agent.empty?
       return false if SiteSetting.darkvisitors_server_analytics_ignore == ""
       agents = SiteSetting.darkvisitors_server_analytics_ignore.split("|")
       agents.any? { |s| user_agent.include?(s) }
