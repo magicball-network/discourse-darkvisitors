@@ -11,7 +11,7 @@ It provides the following features:
 
 In order to use this plugin you need to sign up with [Dark Visitors](https://darkvisitors.com).
 
-For more information and discussion see [this thread](TODO) on the Discourse Meta forum.
+For more information and discussion see [this thread](https://meta.discourse.org/t/dark-visitors/365158) on the Discourse Meta forum.
 
 ## Augmenting robots.txt
 
