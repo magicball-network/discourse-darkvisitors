@@ -2,7 +2,7 @@
 
 # name: discourse-darkvisitors
 # about: Connects to Dark Visitors to keep the robots.txt up to date and monitor crawlers and scrapers visiting your forum.
-# meta_topic_id:
+# meta_topic_id: 365158
 # version: 1.1
 # authors: elmuerte
 # url: https://github.com/magicball-network/discourse-darkvisitors
