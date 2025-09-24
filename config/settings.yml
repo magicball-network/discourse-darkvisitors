@@ -20,7 +20,17 @@ discourse_darkvisitors:
       - AI Assistant
       - AI Data Scraper
       - AI Search Crawler
+      - Archiver
+      - Developer Helper
+      - Fetcher
+      - Headless Agent
+      - Intelligence Gatherer
+      - Scraper
+      - SEO Crawler
+      - Search Engine Crawler
+      - Security Scanner
       - Undocumented AI Agent
+      - Uncategorized
   darkvisitors_robots_txt_path:
     default: '/'
     client: false
