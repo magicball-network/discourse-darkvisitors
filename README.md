@@ -13,6 +13,15 @@ In order to use this plugin you need to sign up with [Dark Visitors](https://dar
 
 For more information and discussion see [this thread](https://meta.discourse.org/t/dark-visitors/365158) on the Discourse Meta forum.
 
+## Plugin Compatibility Status
+
+[![Discourse latest](https://github.com/magicball-network/discourse-darkvisitors/actions/workflows/latest.yml/badge.svg)](https://github.com/magicball-network/discourse-darkvisitors/actions/workflows/latest.yml)
+
+[![Discourse ESR](https://github.com/magicball-network/discourse-darkvisitors/actions/workflows/esr.yml/badge.svg)](https://github.com/magicball-network/discourse-darkvisitors/actions/workflows/esr.yml)
+
+The above status is based on the plugin's executed tests against the specified Discourse branch.
+It is no definite guarantee that there no issues.
+
 ## Augmenting robots.txt
 
 With this enabled the robots.txt file created by Discourse will be augmented with [agents](https://darkvisitors.com/agents) from the configured categories.
