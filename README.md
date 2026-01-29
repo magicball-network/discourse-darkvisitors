@@ -20,7 +20,7 @@ For more information and discussion see [this thread](https://meta.discourse.org
 [![Discourse ESR](https://github.com/magicball-network/discourse-darkvisitors/actions/workflows/esr.yml/badge.svg)](https://github.com/magicball-network/discourse-darkvisitors/actions/workflows/esr.yml)
 
 The above status is based on the plugin's executed tests against the specified Discourse branch.
-It is no definite guarantee that there no issues.
+It is no definite guarantee that there are no issues.
 
 ## Augmenting robots.txt
 
