@@ -74,14 +74,14 @@ discourse_darkvisitors:
     default: false
     hidden: true
   darkvisitors_robots_txt_api:
-    default: "https://api.darkvisitors.com/robots-txts"
+    default: "https://api.knownagents.com/robots-txts"
     client: false
     hidden: true
   darkvisitors_server_analytics_api:
-    default: "https://api.darkvisitors.com/visits"
+    default: "https://api.knownagents.com/visits"
     client: false
     hidden: true
   darkvisitors_client_analytics_script:
-    default: "https://darkvisitors.com/tracker.js"
+    default: "https://knownagents.com/tracker.js"
     client: true
     hidden: true

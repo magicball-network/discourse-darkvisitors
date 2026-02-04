@@ -1,7 +1,7 @@
-# Discourse Dark Visitors Plugin
+# Dark Visitors: Discourse Known Agents Plugin
 
-This [Discourse](https://discourse.com) plugin adds an integration with [Dark Visitors](https://darkvisitors.com). 
-Via Dark Visitors you will get some insights into which bots or scrapers visit your forum.
+This [Discourse](https://discourse.com) plugin adds an integration with [Known Agents](https://knownagents.com), previously called: _Dark Visitors_. 
+Via Known Agents you will get some insights into which bots or scrapers visit your forum.
 
 It provides the following features:
 
@@ -9,7 +9,7 @@ It provides the following features:
 - server analytics
 - client analytics
 
-In order to use this plugin you need to sign up with [Dark Visitors](https://darkvisitors.com).
+In order to use this plugin you need to sign up with [Known Agents](https://knownagents.com).
 
 For more information and discussion see [this thread](https://meta.discourse.org/t/dark-visitors/365158) on the Discourse Meta forum.
 
@@ -24,7 +24,7 @@ It is no definite guarantee that there are no issues.
 
 ## Augmenting robots.txt
 
-With this enabled the robots.txt file created by Discourse will be augmented with [agents](https://darkvisitors.com/agents) from the configured categories.
+With this enabled the robots.txt file created by Discourse will be augmented with [agents](https://knownagents.com/agents) from the configured categories.
 Once a day the latest list of agents is retrieved and the robots.txt is updated accordingly.
 Only agents which are not already registered in the robots.txt are added.
 
@@ -34,15 +34,15 @@ This feature only works if you have not manually overridden robots.txt.
 
 ## Server Analytics
 
-Requests to the server are reported to Dark Visitors.
+Requests to the server are reported to Known Agents.
 
 This feature can be enabled for everybody, or only unauthenticated users (recommended).
 
 ## Client Analytics
 
-A javascript based tracker is added to the forum which, under certain conditions, will report back to Dark Visitors.
+A javascript based tracker is added to the forum which, under certain conditions, will report back to Known Agents.
 
-At the moment of writing under the following conditions trigger a callback to Dark Visitors:
+At the moment of writing under the following conditions trigger a callback to Known Agents:
 - User is referred to the forum from an AI service
 - The browser might be a scraper
 

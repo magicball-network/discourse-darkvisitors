@@ -1,11 +1,11 @@
 en:
   site_settings:
-    darkvisitors_access_token: "Go to the project settings at Dark Visitors and copy the Access Token."
-    darkvisitors_robots_txt_enabled: "Only when enabled will the robots.txt be updated with agents retrieved from Dark Visitors."
-    darkvisitors_robots_txt_agents: "Agent types to include in the robots.txt. See https://darkvisitors.com/agents for an overview of all agents."
+    darkvisitors_access_token: "Go to the project settings at Known Agents and copy the Access Token."
+    darkvisitors_robots_txt_enabled: "Only when enabled will the robots.txt be updated with agents retrieved from Known Agents."
+    darkvisitors_robots_txt_agents: "Agent types to include in the robots.txt. See the <a href=\"https://knownagents.com/agents\">agent list</a> for an overview of all agents and what they are used for."
     darkvisitors_robots_txt_path: "Path not allowed to be visited by the agents."
-    darkvisitors_server_analytics: "Send request data to Dark Visitors for analysis. With 'anonymous_only' only requests form unauthenticated visitors are reported."
-    darkvisitors_server_analytics_include: "Besides standard tracked requests, what other requests should be reported to Dark Visitors."
+    darkvisitors_server_analytics: "Send request data to Known Agents for analysis. With 'anonymous_only' only requests form unauthenticated visitors are reported."
+    darkvisitors_server_analytics_include: "Besides standard tracked requests, what other requests should be reported to Known Agents."
     darkvisitors_server_analytics_ignore: "User agent substrings (case sensitive) to ignore. Use it to exclude uptime monitoring bots."
     darkvisitors_client_analytics: "Add client-side analytics. Redirects from AI services can be traced this way. It also helps to identify possible hidden AI agents."
-    darkvisitors_client_analytics_project_key: "Go to the project settings at Dark Visitors and copy the project_key value from the \"JavaScript Tag\"."
+    darkvisitors_client_analytics_project_key: "Go to the project settings at Known Agents and copy the project_key value from the \"JavaScript Tag\"."
