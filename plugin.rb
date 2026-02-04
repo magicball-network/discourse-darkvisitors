@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 # name: discourse-darkvisitors
-# about: Connects to Dark Visitors to keep the robots.txt up to date and monitor crawlers and scrapers visiting your forum.
+# about: Connects to Known Agents (formerly known as Dark Visitors) to keep the robots.txt up to date and monitor crawlers and scrapers visiting your community.
 # meta_topic_id: 365158
-# version: 1.2
+# version: 1.3
 # authors: elmuerte
 # url: https://github.com/magicball-network/discourse-darkvisitors
 # required_version: 3.4.0

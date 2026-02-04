@@ -20,16 +20,16 @@ module DarkVisitors
         end
       end
       robots_info[:header] = robots_info[:header] +
-        "\n# Augmented by Dark Visitors on #{config[:last_update]} with #{config[:agents].count} agents"
+        "\n# Augmented by Known Agents on #{config[:last_update]} with #{config[:agents].count} agents"
     end
 
     def self.update_robots_txt
       return unless SiteSetting.darkvisitors_robots_txt_enabled
       if SiteSetting.darkvisitors_access_token == ""
-        Rails.logger.warn "Cannot update robots.txt from Dark Visitors. No access_token configured."
+        Rails.logger.warn "Cannot update robots.txt from Known Agents. No access_token configured."
         return
       end
-      Rails.logger.info "Updating Dark Visitors robots.txt"
+      Rails.logger.info "Updating Known Agents robots.txt"
 
       uri =
         URI(
@@ -48,7 +48,7 @@ module DarkVisitors
       }
       response = Net::HTTP.post(uri, request, headers)
       unless response.code == "200"
-        Rails.logger.error "Dark Visitors robots-txt API failure: #{response.code}"
+        Rails.logger.error "Known Agents robots-txt API failure: #{response.code}"
         return
       end
 
@@ -76,7 +76,7 @@ module DarkVisitors
         ROBOTS_TXT,
         { last_update: DateTime.now.to_s, agents: agents }
       )
-      Rails.logger.info "Received #{agents.count} agents to deny from Dark Visitors"
+      Rails.logger.info "Received #{agents.count} agents to deny from Known Agents"
     end
   end
 end
