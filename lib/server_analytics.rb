@@ -19,8 +19,7 @@ module DarkVisitors
       Connection
       Origin
     ]
-    @header_map =
-      @headers.map { |k| ["HTTP_" + k.sub("-", "_").upcase, k] }.to_h
+    @header_map = @headers.index_by { |k| "HTTP_" + k.sub("-", "_").upcase }
 
     def self.log_request(env, data)
       return if SiteSetting.darkvisitors_server_analytics == "disabled"
