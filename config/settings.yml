@@ -34,8 +34,10 @@ discourse_darkvisitors:
     - Undocumented AI Agent
     - Uncategorized
   darkvisitors_robots_txt_path:
+    type: list
     default: '/'
     client: false
+    allow_any: true
   darkvisitors_server_analytics:
     type: enum
     default: disabled
