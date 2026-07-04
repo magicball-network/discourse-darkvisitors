@@ -39,7 +39,7 @@ module DarkVisitors
       request = {
         "agent_types" =>
           SiteSetting.darkvisitors_robots_txt_agents.split("|") || [],
-        "disallow" => SiteSetting.darkvisitors_robots_txt_path || "/"
+        "disallow" => "/"
       }.to_json
       headers = {
         "Content-Type" => "application/json",
@@ -52,24 +52,7 @@ module DarkVisitors
         return
       end
 
-      agents = []
-      agent = { name: nil, disallow: [] }
-      response
-        .body
-        .each_line(chomp: true) do |ln|
-          next if ln.start_with?("#")
-          pair = ln.split(/:/, 2)
-          next if pair.empty?
-          key = pair[0].downcase
-          value = pair[1].strip
-          if key == "user-agent"
-            agents << agent if agent[:name] && !agent[:disallow].empty?
-            agent = { name: value, disallow: [] }
-          elsif key == "disallow"
-            agent[:disallow] << value
-          end
-        end
-      agents << agent if agent[:name] && !agent[:disallow].empty?
+      agents = parse_robots_txt(response.body)
 
       PluginStore.set(
         PLUGIN_NAME,
@@ -77,6 +60,20 @@ module DarkVisitors
         { last_update: DateTime.now.to_s, agents: agents }
       )
       Rails.logger.info "Received #{agents.count} agents to deny from Known Agents"
+    end
+
+    def self.parse_robots_txt(data)
+      agents = []
+      disallow = (SiteSetting.darkvisitors_robots_txt_path || "/").split("|")
+      data.each_line(chomp: true) do |ln|
+        next if ln.strip.start_with?("#")
+        pair = ln.split(/:/, 2)
+        next if pair.empty? || pair.length != 2
+        key = pair[0].downcase
+        value = pair[1].strip
+        agents << { name: value, disallow: disallow } if key == "user-agent"
+      end
+      agents
     end
   end
 end

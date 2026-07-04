@@ -11,13 +11,15 @@ discourse_darkvisitors:
     client: false
   darkvisitors_robots_txt_agents:
     type: list
-    default: "AI Data Scraper|Undocumented AI Agent"
+    default: "AI Data Scraper|AI Data Provider|Undocumented AI Agent"
     client: false
     allow_any: true
     list_type: compact
     choices:
     - AI Agent
     - AI Assistant
+    - AI Coding Agent
+    - AI Data Provider
     - AI Data Scraper
     - AI Search Crawler
     - Archiver
@@ -32,8 +34,10 @@ discourse_darkvisitors:
     - Undocumented AI Agent
     - Uncategorized
   darkvisitors_robots_txt_path:
+    type: list
     default: '/'
     client: false
+    allow_any: true
   darkvisitors_server_analytics:
     type: enum
     default: disabled
