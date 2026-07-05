@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe DarkVisitors::RobotsTxt do
+RSpec.describe DiscourseDarkvisitors::RobotsTxt do
   before do
     SiteSetting.darkvisitors_access_token = "dummy"
     SiteSetting.darkvisitors_robots_txt_enabled = true

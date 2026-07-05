@@ -3,7 +3,7 @@
 require "uri"
 require "net/http"
 
-module DarkVisitors
+module DiscourseDarkvisitors
   ROBOTS_TXT = "robots-txt"
 
   class RobotsTxt

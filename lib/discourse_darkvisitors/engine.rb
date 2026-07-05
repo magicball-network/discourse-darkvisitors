@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-module ::DarkVisitors
+module ::DiscourseDarkvisitors
   class Engine < ::Rails::Engine
     engine_name PLUGIN_NAME
-    isolate_namespace DarkVisitors
+    isolate_namespace DiscourseDarkvisitors
   end
 end

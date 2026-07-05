@@ -3,31 +3,29 @@
 # name: discourse-darkvisitors
 # about: Connects to Known Agents (formerly known as Dark Visitors) to keep the robots.txt up to date and monitor crawlers and scrapers visiting your community.
 # meta_topic_id: 365158
-# version: 1.4
+# version: 2.0
 # authors: elmuerte
 # url: https://github.com/magicball-network/discourse-darkvisitors
 # required_version: 2026.1
 
 enabled_site_setting :darkvisitors_enabled
 
-module ::DarkVisitors
+module ::DiscourseDarkvisitors
   PLUGIN_NAME = "discourse-darkvisitors"
   HTTP_USER_AGENT =
     "#{PLUGIN_NAME}/1.0 (+https://github.com/magicball-network/discourse-darkvisitors)"
+
+  module Jobs
+  end
 end
-module ::DarkVisitors::Jobs
-end
+
+require_relative "lib/discourse_darkvisitors/engine"
 
 after_initialize do
-  require_relative "lib/engine.rb"
-
-  require_relative "lib/robots_txt.rb"
-  require_relative "jobs/scheduled/update_robots_txt"
-
-  require_relative "lib/server_analytics.rb"
+  require_relative "app/jobs/discourse_darkvisitors/scheduled/update_robots_txt"
 
   on(:robots_info) do |robots_info|
-    DarkVisitors::RobotsTxt.on_robots_info(robots_info)
+    DiscourseDarkvisitors::RobotsTxt.on_robots_info(robots_info)
   end
   on(:site_setting_changed) do |name, old_value, new_value|
     if %i[
@@ -37,11 +35,13 @@ after_initialize do
          darkvisitors_robots_txt_path
          darkvisitors_robots_txt_api
        ].include?(name)
-      Jobs.enqueue(DarkVisitors::Jobs::UpdateRobotsTxt)
+      Jobs.enqueue(DiscourseDarkvisitors::Jobs::UpdateRobotsTxt)
     end
   end
 
   logger =
-    lambda { |env, data| DarkVisitors::ServerAnalytics.log_request(env, data) }
+    lambda do |env, data|
+      DiscourseDarkvisitors::ServerAnalytics.log_request(env, data)
+    end
   Middleware::RequestTracker.register_detailed_request_logger(logger)
 end

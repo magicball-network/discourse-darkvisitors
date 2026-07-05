@@ -3,7 +3,7 @@
 require "uri"
 require "net/http"
 
-module DarkVisitors
+module DiscourseDarkvisitors
   class ServerAnalytics
     @headers = %w[
       User-Agent
