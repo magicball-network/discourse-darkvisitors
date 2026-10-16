@@ -41,7 +41,7 @@ module DiscourseDarkvisitors
       uri =
         URI(
           SiteSetting.darkvisitors_robots_txt_api ||
-            "https://api.darkvisitors.com/robots-txts"
+            "https://api.knownagents.com/robots-txts"
         )
       request = {
         "agent_types" =>
