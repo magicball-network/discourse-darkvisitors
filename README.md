@@ -7,7 +7,6 @@ It provides the following features:
 
 - augmenting robots.txt 
 - server analytics
-- client analytics
 
 In order to use this plugin you need to sign up with [Known Agents](https://knownagents.com).
 
@@ -37,13 +36,3 @@ This feature only works if you have not manually overridden robots.txt.
 Requests to the server are reported to Known Agents.
 
 This feature can be enabled for everybody, or only unauthenticated users (recommended).
-
-## Client Analytics
-
-A javascript based tracker is added to the forum which, under certain conditions, will report back to Known Agents.
-
-At the moment of writing under the following conditions trigger a callback to Known Agents:
-- User is referred to the forum from an AI service
-- The browser might be a scraper
-
-This feature can be enabled for everybody, or only unauthenticated users.
