@@ -3,7 +3,7 @@
 require "uri"
 require "net/http"
 
-module DarkVisitors
+module DiscourseDarkvisitors
   ROBOTS_TXT = "robots-txt"
 
   class RobotsTxt
@@ -12,13 +12,20 @@ module DarkVisitors
 
       config = PluginStore.get(PLUGIN_NAME, ROBOTS_TXT) || return
 
+      # Add the new agents before the wildcard entry
+      position =
+        robots_info[:agents].index { |agent| agent[:name] == "*" } ||
+          robots_info[:agents].count
+
       config[:agents].each do |entry|
         unless robots_info[:agents].any? { |agent|
                  agent[:name] == entry[:name]
                }
-          robots_info[:agents] << entry
+          robots_info[:agents].insert(position, entry.symbolize_keys)
+          position += 1
         end
       end
+
       robots_info[:header] = robots_info[:header] +
         "\n# Augmented by Known Agents on #{config[:last_update]} with #{config[:agents].count} agents"
     end
@@ -34,7 +41,7 @@ module DarkVisitors
       uri =
         URI(
           SiteSetting.darkvisitors_robots_txt_api ||
-            "https://api.darkvisitors.com/robots-txts"
+            "https://api.knownagents.com/robots-txts"
         )
       request = {
         "agent_types" =>

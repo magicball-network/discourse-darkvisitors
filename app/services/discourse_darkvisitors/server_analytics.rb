@@ -3,24 +3,8 @@
 require "uri"
 require "net/http"
 
-module DarkVisitors
+module DiscourseDarkvisitors
   class ServerAnalytics
-    @headers = %w[
-      User-Agent
-      Referer
-      From
-      X-Forwarded-For
-      X-Real-IP
-      Forwarded
-      X-Original-Forwarded-For
-      Accept
-      Accept-Language
-      Accept-Encoding
-      Connection
-      Origin
-    ]
-    @header_map = @headers.index_by { |k| "HTTP_" + k.sub("-", "_").upcase }
-
     def self.log_request(env, data)
       return if SiteSetting.darkvisitors_server_analytics == "disabled"
       if SiteSetting.darkvisitors_access_token.empty?
@@ -42,22 +26,8 @@ module DarkVisitors
       request = {
         request_path: env["REQUEST_PATH"],
         request_method: env["REQUEST_METHOD"],
-        request_headers: {
-        }
+        request_headers: RequestUtils.safe_headers(env, data)
       }
-      if data[:request_remote_ip]
-        if data[:request_remote_ip].include?(":")
-          request[:request_headers]["Remote-Addr"] = "[" +
-            data[:request_remote_ip] + "]"
-        else
-          request[:request_headers]["Remote-Addr"] = data[:request_remote_ip]
-        end
-      end
-
-      @header_map.each do |key, header|
-        next if env[key].blank?
-        request[:request_headers][header] = env[key]
-      end
 
       Scheduler::Defer.later("Track Dark Visitors") { report_visit(request) }
     end
@@ -70,7 +40,7 @@ module DarkVisitors
       uri =
         URI(
           SiteSetting.darkvisitors_server_analytics_api ||
-            "https://api.darkvisitors.com/visits"
+            "https://api.knownagents.com/visits"
         )
       headers = {
         "Content-Type" => "application/json",

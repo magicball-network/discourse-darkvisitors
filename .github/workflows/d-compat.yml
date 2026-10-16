@@ -1,0 +1,29 @@
+name: Discourse compatibility branch
+on:
+  push:
+    branches:
+      - d-compat/**
+  pull_request:
+    branches:
+      - d-compat/**
+  workflow_dispatch:
+
+jobs:
+  discourse-branch:
+    runs-on: ubuntu-latest
+    outputs:
+      branch: ${{steps.determine.outputs.branch}}
+    steps:
+    - id: determine
+      run: |
+        echo "Determine target Discourse branch to use..."
+        USE_REF=${GITHUB_BASE_REF:-$GITHUB_REF}
+        echo $USE_REF | grep -q /d-compat/ || ( echo "Build is not for a d-compat branch: $USE_REF" >> "$GITHUB_STEP_SUMMARY"; exit 1)
+        DISCOURSE_BRANCH=release/${USE_REF#*/d-compat/}
+        echo "Use Discourse branch: $DISCOURSE_BRANCH" >> "$GITHUB_STEP_SUMMARY"
+        echo "branch=$DISCOURSE_BRANCH" >> "$GITHUB_OUTPUT"
+  ci:
+    needs: discourse-branch
+    uses: discourse/.github/.github/workflows/discourse-plugin.yml@v1
+    with:
+      core_ref: ${{needs.discourse-branch.outputs.branch}}
