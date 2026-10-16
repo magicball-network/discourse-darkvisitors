@@ -61,18 +61,6 @@ discourse_darkvisitors:
     type: list
     default: "hetrix.tools|www.uptimerobot.com"
     client: false
-  darkvisitors_client_analytics:
-    type: enum
-    default: disabled
-    client: true
-    choices:
-      - disabled
-      - anonymous_only
-      - enabled
-  darkvisitors_client_analytics_project_key:
-    default: ""
-    client: true
-
   # If true, certain requests will not actually be send. Just logged.
   darkvisitors_simulate:
     default: false

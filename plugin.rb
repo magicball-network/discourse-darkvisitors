@@ -3,7 +3,7 @@
 # name: discourse-darkvisitors
 # about: Connects to Known Agents (formerly known as Dark Visitors) to keep the robots.txt up to date and monitor crawlers and scrapers visiting your community.
 # meta_topic_id: 365158
-# version: 2.0
+# version: 1.5
 # authors: elmuerte
 # url: https://github.com/magicball-network/discourse-darkvisitors
 # required_version: 2026.1
