@@ -4,7 +4,7 @@ module ::DiscourseDarkvisitors::Jobs
   class UpdateRobotsTxt < ::Jobs::Scheduled
     every 1.day
 
-    def execute(args)
+    def execute(_args)
       DiscourseDarkvisitors::RobotsTxt.update_robots_txt
     end
   end

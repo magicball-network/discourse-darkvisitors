@@ -27,7 +27,7 @@ after_initialize do
   on(:robots_info) do |robots_info|
     DiscourseDarkvisitors::RobotsTxt.on_robots_info(robots_info)
   end
-  on(:site_setting_changed) do |name, old_value, new_value|
+  on(:site_setting_changed) do |name, _old_value, _new_value|
     if %i[
          darkvisitors_robots_txt_enabled
          darkvisitors_access_token
